@@ -13,8 +13,8 @@ import api from '../api'
 export class AppComponent {
   title = 'app';
   url = null; 
-  params = null;
-  verifierParams = null;
+  authenticated = null;
+  
 
   constructor(private service: AuthService) {}
 
@@ -22,22 +22,23 @@ export class AppComponent {
     this.processAuth();
   }
 
-  processAuth(): void {
+  private processAuth(): void {
     var search = window.location.search;
-    if(search) {
-      this.verifierParams = parseURLQuery(search.substring(1))
-      this.url = this.service.accessToken(this.verifierParams, REQUEST_TOKEN_PARAMS)
-                  .then(response => this.url = response)
-      
-    } else {
-      this.url = this.service.requestToken()
-                .then(params => {
-                   this.url = api['AUTHORIZE'] + '?oauth_token=' 
-                      + params['oauth_token']
-                      + '&perms=read';
-                    this.params = params; 
-                    localStorage.setItem('secret', params['oauth_token_secret']);
-                })
+    if(!this.authenticated){
+      if(search) {
+        this.authenticated = {}
+        var verifierParams = parseURLQuery(search.substring(1))
+        this.url = this.service.accessToken(verifierParams, REQUEST_TOKEN_PARAMS)
+          .then(response => this.authenticated = response)
+      } else {
+        this.url = this.service.requestToken()
+          .then(params => {
+            this.url = api['AUTHORIZE'] + '?oauth_token=' 
+              + params['oauth_token']
+              + '&perms=read'; 
+            localStorage.setItem('secret', params['oauth_token_secret']);
+        })
+      }
     }
   }
 }
