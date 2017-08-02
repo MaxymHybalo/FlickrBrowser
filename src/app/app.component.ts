@@ -2,6 +2,7 @@ import { Component, OnInit, Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { parseURLQuery, sortObject } from '../utils'
 import { REQUEST_TOKEN_PARAMS } from '../auth'
+import api from '../api'
 
 @Component({
   selector: 'app-root',
@@ -31,7 +32,7 @@ export class AppComponent {
     } else {
       this.url = this.service.requestToken()
                 .then(params => {
-                   this.url = 'https://www.flickr.com/services/oauth/authorize?oauth_token=' 
+                   this.url = api['AUTHORIZE'] + '?oauth_token=' 
                       + params['oauth_token']
                       + '&perms=read';
                     this.params = params; 

@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http'
 import { getRequestTokenURL, buildURL, REQUEST_TOKEN_PARAMS } from '../auth'
 import { parseURLQuery } from '../utils'
+import api from '../api'
+
 import 'rxjs/add/operator/toPromise';
 
-var accessTokenUrl: string = 'https://www.flickr.com/services/oauth/access_token';
-var requestTokenUrl: string = 'https://www.flickr.com/services/oauth/request_token';
+var accessTokenUrl: string = api['ACCESS_TOKEN_URL'];
+var requestTokenUrl: string = api['REQUEST_TOKEN_URL'];
 
 @Injectable()
 export class AuthService {

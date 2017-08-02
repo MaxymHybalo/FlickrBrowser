@@ -1,7 +1,8 @@
 import b64_hmac_sha1 from 'hmacsha1';
 import { makeURLSearchQuery, sortObject } from './utils'
+import api from './api'
 
-var requestTokenUrl: string = 'https://www.flickr.com/services/oauth/request_token';
+var requestTokenUrl: string = api['REQUEST_TOKEN_URL'];
 
 var appKey: string = '18a91e0d831c8ae7ce2f2478e8f7f2d0';
 
