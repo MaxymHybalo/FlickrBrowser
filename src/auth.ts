@@ -6,7 +6,7 @@ var appKey: string = '18a91e0d831c8ae7ce2f2478e8f7f2d0';
 
 var appSecret: string = '7f91aaf323eb9674';
 
-var redirectUrl: string = encodeURIComponent('http://localhost:4200');
+var redirectUrl: string = encodeURIComponent('http://localhost:4200/');
 
 var nonce: number = Math.floor(Math.random() * (9999999999 - 1000000000) + 1000000000);
 
@@ -30,11 +30,9 @@ export function getRequestTokenURL() {
 }
 
 export function getBaseQuery() {
-    console.log('Params: ', requestTokenParams);
-    
     return 'GET&' 
-        + encodeURIComponent(requestTokenUrl) +'&'
-        + encodeURIComponent(buildURIQuery(requestTokenParams));
+            + encodeURIComponent(requestTokenUrl) +'&'
+            + encodeURIComponent(buildURIQuery(requestTokenParams));
 }
 
 export function generateSingature(baseString: string) {
@@ -48,7 +46,5 @@ function buildURIQuery(params) {
         concatParams += key + '=' + requestTokenParams[key] + '&'
     }
     concatParams = concatParams.slice(0, concatParams.length-1);
-    console.log(concatParams);
-    
     return concatParams;
 }

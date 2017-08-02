@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { getRequestTokenURL, getBaseQuery } from '../auth'
-import b64_hmac_sha1 from 'hmacsha1';
+import { Component, OnInit, Injectable } from '@angular/core';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,16 +8,16 @@ import b64_hmac_sha1 from 'hmacsha1';
 })
 
 export class AppComponent {
-  signature =  null;
-  baseString = null;
-  mockUrl = null;
   title = 'app';
+  url = null; 
 
-  url = null;
+  constructor(private service: AuthService) {}
 
   ngOnInit(): void {    
-    this.mockUrl = getBaseQuery();
-    var mockSign = getBaseQuery();
-    this.url = getRequestTokenURL();
+    console.log(window.location);
+    this.url = this.service.requestToken()
+                .then(params => this.url = 'https://www.flickr.com/services/oauth/authorize?oauth_token=' 
+                    + params['oauth_token']
+                    + '&perms=read');
   }
 }
