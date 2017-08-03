@@ -8,6 +8,7 @@ import 'rxjs/add/operator/toPromise';
 
 var accessTokenUrl: string = api['ACCESS_TOKEN_URL'];
 var requestTokenUrl: string = api['REQUEST_TOKEN_URL'];
+var redirectUrl: string = encodeURIComponent('http://localhost:4200/');
 
 @Injectable()
 export class AuthService {
@@ -15,7 +16,8 @@ export class AuthService {
     constructor(private http: Http) {}
 
     requestToken(): Promise<string> {
-        return this.http.get(buildURL(null, requestTokenUrl))
+        var callbackParam = { 'oauth_callback': redirectUrl}
+        return this.http.get(buildURL(callbackParam, requestTokenUrl))
                 .toPromise()
                 .then(response => parseURLQuery(response.text()) as object)
                 .catch(error => error)

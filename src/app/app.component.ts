@@ -1,8 +1,8 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { Router } from '@angular/router'
 import { AuthService } from './auth.service';
-import { parseURLQuery, sortObject } from '../utils'
-import { REQUEST_TOKEN_PARAMS } from '../auth'
+import { parseURLQuery } from '../utils'
+
 import api from '../api'
 
 @Component({

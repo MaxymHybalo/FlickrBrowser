@@ -8,14 +8,11 @@ var appKey: string = '18a91e0d831c8ae7ce2f2478e8f7f2d0';
 
 var appSecret: string = '7f91aaf323eb9674&';
 
-var redirectUrl: string = encodeURIComponent('http://localhost:4200/');
-
 var nonce: number = Math.floor(Math.random() * (9999999999 - 1000000000) + 1000000000);
 
 var timestamp: number = new Date().valueOf();
 
-export const REQUEST_TOKEN_PARAMS = {
-    'oauth_callback': redirectUrl,
+const REQUEST_TOKEN_PARAMS = {
     'oauth_consumer_key': appKey,
     'oauth_nonce': nonce,
     'oauth_signature_method': 'HMAC-SHA1',
