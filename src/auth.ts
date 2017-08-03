@@ -24,29 +24,22 @@ export const REQUEST_TOKEN_PARAMS = {
 }
 
 export function buildURL(params, baseUrl, secret='') {
-    params = sortObject(params);
-    let baseString = getBaseQuery('GET', baseUrl, params);
+    var assignedParams = params ? Object.assign(REQUEST_TOKEN_PARAMS, params) : REQUEST_TOKEN_PARAMS;
+    assignedParams = sortObject(assignedParams);
+    let baseString = getBaseQuery('GET', baseUrl, assignedParams);
     return baseUrl + '?'
-                + buildURIQuery(params)
+                + buildURIQuery(assignedParams)
                 + '&oauth_signature='
                 + generateSingature(baseString, appSecret + secret)
 }
 
-export function getRequestTokenURL() {
-    var params = REQUEST_TOKEN_PARAMS;
-    return requestTokenUrl 
-            + '?' 
-            + buildURIQuery(params)
-            + '&oauth_signature=' + generateSingature(getBaseQuery());
-}
-
-export function getBaseQuery(method='GET', url=requestTokenUrl, params=REQUEST_TOKEN_PARAMS) {
+function getBaseQuery(method='GET', url=requestTokenUrl, params=REQUEST_TOKEN_PARAMS) {
     return  method + '&' 
             + encodeURIComponent(url) +'&'
             + encodeURIComponent(buildURIQuery(params));
 }
 
-export function generateSingature(baseString: string, secret: string = appSecret) {
+function generateSingature(baseString: string, secret: string = appSecret) {
     return encodeURIComponent(b64_hmac_sha1(secret, baseString));
 }
 

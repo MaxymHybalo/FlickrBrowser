@@ -28,7 +28,7 @@ export class AppComponent implements OnInit{
       if(search) {
         this.isAuthenticated = true
         var verifierParams = parseURLQuery(search.substring(1))
-        this.url = this.service.accessToken(verifierParams, REQUEST_TOKEN_PARAMS)
+        this.url = this.service.accessToken(verifierParams)
           .then(response => {
             localStorage.setItem('accessToken', JSON.stringify(response));
             this.router.navigate(['profile']);
