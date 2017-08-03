@@ -1,4 +1,5 @@
 import { Component, OnInit, Injectable } from '@angular/core';
+import { Router } from '@angular/router'
 import { AuthService } from './auth.service';
 import { parseURLQuery, sortObject } from '../utils'
 import { REQUEST_TOKEN_PARAMS } from '../auth'
@@ -10,13 +11,12 @@ import api from '../api'
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'app';
   url = null; 
-  authenticated = null;
+  isAuthenticated = false;
   
-
-  constructor(private service: AuthService) {}
+  constructor(private service: AuthService, private router: Router) {}
 
   ngOnInit(): void {    
     this.processAuth();
@@ -24,12 +24,15 @@ export class AppComponent {
 
   private processAuth(): void {
     var search = window.location.search;
-    if(!this.authenticated){
+    if(!this.isAuthenticated){
       if(search) {
-        this.authenticated = {}
+        this.isAuthenticated = true
         var verifierParams = parseURLQuery(search.substring(1))
         this.url = this.service.accessToken(verifierParams, REQUEST_TOKEN_PARAMS)
-          .then(response => this.authenticated = response)
+          .then(response => {
+            localStorage.setItem('accessToken', JSON.stringify(response));
+            this.router.navigate(['profile']);
+          });
       } else {
         this.url = this.service.requestToken()
           .then(params => {
