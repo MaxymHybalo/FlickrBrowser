@@ -8,7 +8,7 @@ import 'rxjs/add/operator/toPromise';
 
 var accessTokenUrl: string = api['ACCESS_TOKEN_URL'];
 var requestTokenUrl: string = api['REQUEST_TOKEN_URL'];
-var redirectUrl: string = encodeURIComponent('http://localhost:4200/');
+var redirectUrl: string = encodeURIComponent('http://localhost:4200');
 
 @Injectable()
 export class AuthService {

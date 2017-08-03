@@ -8,14 +8,16 @@ import { ProfileComponent } from './profile/profile.component'
 
 import { AuthService } from './auth.service';
 import { ProfileService } from './profile/profile.service';
-import { HeaderComponent } from './header/header.component'
+import { HeaderComponent } from './header/header.component';
+import { LoginComponent } from './login/login.component'
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ProfileComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +25,12 @@ import { HeaderComponent } from './header/header.component'
     RouterModule.forRoot([{
       path: 'profile',
       component: ProfileComponent
-    }])
+    },
+    {
+      path: 'login',
+      component: LoginComponent
+    }
+  ])
   ],
   providers: [
     AuthService,
