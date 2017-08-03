@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component'
 
 import { AuthService } from './auth.service';
-import { ProfileService } from './profile/profile.service'
+import { ProfileService } from './profile/profile.service';
+import { HeaderComponent } from './header/header.component'
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProfileComponent
+    ProfileComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
