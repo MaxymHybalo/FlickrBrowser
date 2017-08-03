@@ -1,9 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <a *ngIf='!authenticated' href='{{ url }}' >Sign in</a>
-  <p>
-    {{ url }}
-  </p>
-
+<div class="signin">
+  <a *ngIf='!authenticated' href='{{ url }}' class="btn btn-primary btn-lg btn-block">
+    Sign in 
+      <svg class="icon icon-flickr2"><use xlink:href="#icon-flickr2"></use></svg>
+  </a>
 </div>
 
