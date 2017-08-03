@@ -14,6 +14,10 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.msg = this.service.testMessage();
+    this.service.flickTestLogin()
+      .then(json => { 
+        this.msg = json['user'].username._content;
+      })
   }
 
 }
