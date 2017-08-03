@@ -24,6 +24,7 @@ export class AppComponent implements OnInit{
 
   private processAuth(): void {
     var search = window.location.search;
+    this.isAuthenticated = this.checkStorage()
     if(!this.isAuthenticated){
       if(search) {
         this.isAuthenticated = true
@@ -43,5 +44,12 @@ export class AppComponent implements OnInit{
         })
       }
     }
+  }
+
+  private checkStorage(){
+    if (localStorage.getItem('accessToken')){
+      return true;
+    }
+    return false;
   }
 }
