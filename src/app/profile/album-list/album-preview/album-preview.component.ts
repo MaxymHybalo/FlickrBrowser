@@ -11,12 +11,15 @@ export class AlbumPreviewComponent implements OnInit {
 
   @Input() album: object;
 
+  update: string;
+
   photo = null;
   photoResource = null;
 
   constructor(private service: AlbumService) { }
 
   ngOnInit() {
+    this.update = new Date(parseInt(this.album['date_update'] + '000')).toDateString();
     this.service.getPhotos(this.album)
       .then(photoset => {
         this.photo = photoset;

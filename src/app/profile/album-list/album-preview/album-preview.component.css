@@ -1,0 +1,27 @@
+.album-container {
+    margin: 0.1em;
+    max-height: 150px;
+    padding: 1.25em;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25em;
+    cursor: pointer;
+
+}
+.album-container:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,.5);
+}
+.image-container {
+    width: 100px;
+    height: 100px;
+    /* display: inline-flex; */
+    top: 50%;
+    /* align-content: space-around; */
+}
+.album-info {
+    margin: 1.2em;
+    margin-left: 1.5em;
+}
+
+h5 {
+    color: #4d90fe;
+}

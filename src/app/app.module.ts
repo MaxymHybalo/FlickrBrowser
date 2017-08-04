@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component'
 
@@ -26,6 +27,7 @@ import { AlbumPreviewComponent } from './profile/album-list/album-preview/album-
   imports: [
     BrowserModule,
     HttpModule,
+    NgbModule,
     RouterModule.forRoot([{
       path: 'profile',
       component: ProfileComponent
