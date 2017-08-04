@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { buildApiUrl, buildURL, appKey } from '../../../auth'
-import api from '../../../api'
+import { buildApiUrl, buildURL, appKey } from '../../auth'
+import api from '../../api'
 
 import 'rxjs/add/operator/toPromise';
 
@@ -27,11 +27,11 @@ export class AlbumService{
 
     }
 
-    getPhotos(photoset, page=1, per_page=1): Promise<object>{
+    getPhotos(id, page=1, per_page=1): Promise<object>{
         this.init()
         let params = {
             method: 'flickr.photosets.getPhotos',
-            photoset_id: photoset.id,
+            photoset_id: id,
             user_id: decodeURIComponent(this.accessToken['user_nsid']),
             page: page,
             per_page: per_page

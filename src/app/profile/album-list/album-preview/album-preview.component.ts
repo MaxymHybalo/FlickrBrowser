@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AlbumService } from '../album.service'
+import { AlbumService } from '../../album.service'
 import { Router } from '@angular/router'
 
 @Component({
@@ -21,7 +21,7 @@ export class AlbumPreviewComponent implements OnInit {
 
   ngOnInit() {
     this.update = new Date(parseInt(this.album['date_update'] + '000')).toDateString();
-    this.service.getPhotos(this.album)
+    this.service.getPhotos(this.album['id'])
       .then(photoset => {
         this.photo = photoset;
         this.service.getPhotoSizes(photoset['photoset']['photo'][0]['id'])
