@@ -1,5 +1,5 @@
 <div class="album-container col-12">
-  <img src="" alt="" class="album-img">
+  <img *ngIf="photoResource" src="{{ photoResource.source }}" alt="" class="album-img">
   <h5>
     {{ album.title._content}}    
   </h5>
