@@ -4,7 +4,7 @@ import api from './api'
 
 var requestTokenUrl: string = api['REQUEST_TOKEN_URL'];
 
-var appKey: string = '18a91e0d831c8ae7ce2f2478e8f7f2d0';
+export var appKey: string = '18a91e0d831c8ae7ce2f2478e8f7f2d0';
 
 var appSecret: string = '7f91aaf323eb9674&';
 
@@ -27,7 +27,10 @@ export function buildURL(params, baseUrl, secret='') {
 }
 
 export function buildApiUrl(params, baseUrl){
-    let secret = appSecret + localStorage.getItem('secret');
+    var accessTokenParams = JSON.parse(localStorage.getItem('accessToken'));
+    console.log('access token secret: ', accessTokenParams);
+    
+    let secret = appSecret + accessTokenParams['oauth_token_secret'];
     let query = prepareQuery(params, baseUrl, secret);
     return query['url'] + '&api_sig=' + query['signature']
 }

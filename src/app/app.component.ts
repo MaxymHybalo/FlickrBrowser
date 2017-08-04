@@ -26,7 +26,8 @@ export class AppComponent implements OnInit{
           localStorage.setItem('accessToken', JSON.stringify(response));
           this.router.navigate(['profile']);
         });
+    }else{
+      this.router.navigate(['profile']);
     }
-    this.router.navigate(['profile']);
   }
 }
