@@ -14,7 +14,7 @@ export class AlbumListComponent implements OnInit {
 
   ngOnInit() {
     this.service.getAlbums()
-      .then(json => this.photosets=  json['photosets']['photoset'])
+      .then(json => this.photosets =  json['photosets']['photoset'])
   }
 
 }

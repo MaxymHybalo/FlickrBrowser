@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AlbumService } from '../album.service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-album-preview',
@@ -16,7 +17,7 @@ export class AlbumPreviewComponent implements OnInit {
   photo = null;
   photoResource = null;
 
-  constructor(private service: AlbumService) { }
+  constructor(private service: AlbumService, private router: Router) { }
 
   ngOnInit() {
     this.update = new Date(parseInt(this.album['date_update'] + '000')).toDateString();
@@ -29,6 +30,10 @@ export class AlbumPreviewComponent implements OnInit {
           }
         )
       })
+  }
+  
+  browseAlbum() {
+    this.router.navigate(['profile','album', this.album['id']])
   }
 
   private mapResource(resorce) {

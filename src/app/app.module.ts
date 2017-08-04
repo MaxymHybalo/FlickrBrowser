@@ -13,7 +13,8 @@ import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { AlbumListComponent } from './profile/album-list/album-list.component'
 import { AlbumService } from './profile/album-list/album.service';
-import { AlbumPreviewComponent } from './profile/album-list/album-preview/album-preview.component'
+import { AlbumPreviewComponent } from './profile/album-list/album-preview/album-preview.component';
+import { AlbumComponent } from './profile/album/album.component'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AlbumPreviewComponent } from './profile/album-list/album-preview/album-
     HeaderComponent,
     LoginComponent,
     AlbumListComponent,
-    AlbumPreviewComponent
+    AlbumPreviewComponent,
+    AlbumComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,17 @@ import { AlbumPreviewComponent } from './profile/album-list/album-preview/album-
     NgbModule,
     RouterModule.forRoot([{
       path: 'profile',
-      component: ProfileComponent
+      component: ProfileComponent,
+      children: [
+        {
+          path: '',
+          component: AlbumListComponent
+        },
+        {
+          path: 'album/:id',
+          component: AlbumComponent
+        }
+      ]
     },
     {
       path: 'login',

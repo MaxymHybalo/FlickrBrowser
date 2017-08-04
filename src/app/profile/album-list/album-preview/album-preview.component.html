@@ -1,4 +1,4 @@
-<div class="album-container row">
+<div class="album-container row" (click)="browseAlbum()">
   <div class="image-container row align-items-center justify-content-around">
     <img *ngIf="photoResource" src="{{ photoResource.source }}" alt="" class="album-img"/>
   </div>
