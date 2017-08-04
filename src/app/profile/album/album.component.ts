@@ -21,7 +21,7 @@ export class AlbumComponent implements OnInit {
     private service: AlbumService
   ) { }
 
-  album: object;
+  album = [];
 
   currentPage = 1;
 
@@ -34,6 +34,14 @@ export class AlbumComponent implements OnInit {
           this.currentPage, 
           PHOTO_PER_PAGE
         ))
-      .subscribe(page => this.album = page)
+      .subscribe(page => this.album = page['photoset']['photo'])
+  }
+  
+  private markupToGrid(album) {
+    album = album['photoset']['photo'];
+    let mappedArray = [];
+    for(let i=0; i<=album.lenght; i++){
+
+    }
   }
 }
