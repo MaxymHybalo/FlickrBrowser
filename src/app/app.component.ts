@@ -18,7 +18,7 @@ export class AppComponent implements OnInit{
   ngOnInit(){
     if(!localStorage.getItem('secret')){
       this.router.navigate(['login'])
-    }else{
+    }else if(!localStorage.getItem('accessToken')) {
       var search = window.location.search;
       var verifierParams = parseURLQuery(search.substring(1))
       this.service.accessToken(verifierParams)
@@ -27,5 +27,6 @@ export class AppComponent implements OnInit{
           this.router.navigate(['profile']);
         });
     }
+    this.router.navigate(['profile']);
   }
 }

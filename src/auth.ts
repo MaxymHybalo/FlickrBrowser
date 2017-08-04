@@ -22,12 +22,23 @@ const REQUEST_TOKEN_PARAMS = {
 
 export function buildURL(params, baseUrl, secret='') {
     var assignedParams = params ? Object.assign(REQUEST_TOKEN_PARAMS, params) : REQUEST_TOKEN_PARAMS;
-    assignedParams = sortObject(assignedParams);
-    let baseString = getBaseQuery('GET', baseUrl, assignedParams);
-    return baseUrl + '?'
-                + buildURIQuery(assignedParams)
-                + '&oauth_signature='
-                + generateSingature(baseString, appSecret + secret)
+    let queryObject = prepareQuery(assignedParams, baseUrl, appSecret + secret);
+    return queryObject['url'] + '&oauth_signature=' + queryObject['signature'];
+}
+
+export function buildApiUrl(params, baseUrl){
+    let secret = appSecret + localStorage.getItem('secret');
+    let query = prepareQuery(params, baseUrl, secret);
+    return query['url'] + '&api_sig=' + query['signature']
+}
+
+function prepareQuery(params, baseUrl, secret, method='GET') {
+    params = sortObject(params);
+    let baseString = getBaseQuery(method, baseUrl, params);
+    return {
+        url: baseUrl + '?' + buildURIQuery(params),
+        signature: generateSingature(baseString, secret)
+    }
 }
 
 function getBaseQuery(method='GET', url=requestTokenUrl, params=REQUEST_TOKEN_PARAMS) {
