@@ -34,6 +34,7 @@ export class AuthService {
 
     private handleError(error: any): Promise<any> {
         console.log('An error occurred', error);
+        localStorage.clear();
         return Promise.reject(error.message || error)
     }
 
