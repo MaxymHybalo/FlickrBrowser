@@ -2,18 +2,7 @@
 <div *ngIf="photo" class="photo-container" >
   <img src="{{ photo.source }}" alt="">   
 </div>
-<div *ngIf="info" class="info-container" >
-  <p>
-    <strong>Name:</strong> {{ info.title._content }}
-  </p>
-  <p *ngIf="info.description._content">
-    <strong>Description:</strong> {{ info.description._content }} 
-  </p>
-  <p>
-    <strong>Owner:</strong> {{ info.owner.realname }}
-  </p>
-  <p><strong>Upload date: </strong>{{ info.dateuploaded }}</p>  
-</div>
+<app-tooltip [info]="info"></app-tooltip>
 <div *ngIf="tags" class="tags-conatiner" >
   <strong>Tags: </strong>
   <span *ngFor="let tag of tags.tag" class="badge badge-primary">{{ tag.raw }}</span>

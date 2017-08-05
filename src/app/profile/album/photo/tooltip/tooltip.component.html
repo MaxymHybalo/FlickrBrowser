@@ -1,0 +1,12 @@
+<div *ngIf="info" class="info-container" >
+  <p>
+    <strong>Name:</strong> {{ info.title._content }}
+  </p>
+  <p *ngIf="info.description._content">
+    <strong>Description:</strong> {{ info.description._content }} 
+  </p>
+  <p>
+    <strong>Owner:</strong> {{ info.owner.realname }}
+  </p>
+  <p><strong>Upload date: </strong>{{ info.dateuploaded }}</p>  
+</div>

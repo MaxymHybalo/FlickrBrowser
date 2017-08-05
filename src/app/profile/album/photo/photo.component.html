@@ -1,5 +1,8 @@
 <div class="photo-container" (click) = "openDetails()">
   <div class="photo"> 
     <img  *ngIf="sizes" src="{{ sizes.source }}" alt="" class="photo-img"> 
-  </div>  
+  </div> 
+  <div class="tooltiptext">
+    <app-tooltip [info]="info"></app-tooltip>
+  </div>
 </div>

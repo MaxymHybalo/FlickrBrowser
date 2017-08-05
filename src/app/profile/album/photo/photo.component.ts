@@ -13,11 +13,15 @@ export class PhotoComponent implements OnInit {
 
   sizes: object;
 
+  info: object;
+
   constructor(private service: PhotoService, private router: Router) { }
 
   ngOnInit() {
     this.service.getPhotoSizes(this.photo['id'])
       .then(sizes => this.sizes = sizes['sizes']['size'][3])
+    this.service.getInfo(this.photo['id'])
+      .then(info => this.info = info['photo']);
   }
   
   openDetails(){

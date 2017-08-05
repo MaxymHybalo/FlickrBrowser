@@ -19,7 +19,8 @@ import { AlbumPreviewComponent } from './profile/album-list/album-preview/album-
 import { AlbumComponent } from './profile/album/album.component';
 import { PhotoComponent } from './profile/album/photo/photo.component';
 import { NavBarComponent } from './profile/nav-bar/nav-bar.component';
-import { PhotoDetailsComponent } from './profile/album/photo/photo-details/photo-details.component'
+import { PhotoDetailsComponent } from './profile/album/photo/photo-details/photo-details.component';
+import { TooltipComponent } from './profile/album/photo/tooltip/tooltip.component'
 
 const routes = [{
       path: 'profile',
@@ -56,7 +57,8 @@ const routes = [{
     AlbumComponent,
     PhotoComponent,
     NavBarComponent,
-    PhotoDetailsComponent
+    PhotoDetailsComponent,
+    TooltipComponent
   ],
   imports: [
     BrowserModule,
