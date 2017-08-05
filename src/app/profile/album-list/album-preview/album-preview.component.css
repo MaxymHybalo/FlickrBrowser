@@ -13,9 +13,6 @@
 .image-container {
     width: 100px;
     height: 100px;
-    /* display: inline-flex; */
-    top: 50%;
-    /* align-content: space-around; */
 }
 .album-info {
     margin: 1.2em;
