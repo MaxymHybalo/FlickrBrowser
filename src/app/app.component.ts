@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 import { AuthService } from './auth.service'
-
+import { Location } from '@angular/common'
 import { parseURLQuery } from '../utils'
 
 @Component({
@@ -13,7 +13,11 @@ import { parseURLQuery } from '../utils'
 export class AppComponent implements OnInit{
   title = 'app';
 
-  constructor(private router: Router, private service: AuthService){}
+  constructor(
+    private router: Router, 
+    private service: AuthService,
+    private location: Location
+  ){}
 
   ngOnInit(){
     if(!localStorage.getItem('secret')){
@@ -27,7 +31,10 @@ export class AppComponent implements OnInit{
           this.router.navigate(['profile']);
         });
     }else{
-      this.router.navigate(['profile']);
+      let path = this.location.path();
+      if(path === '' || path === '/'){
+        this.router.navigate(['profile']);        
+      }
     }
   }
 }
