@@ -37,6 +37,10 @@ export class AlbumComponent implements OnInit {
       .subscribe(page => this.album = page['photoset']['photo'])
   }
   
+  goBack(): void {
+    this.location.back();
+  }
+
   private markupToGrid(album) {
     album = album['photoset']['photo'];
     let mappedArray = [];

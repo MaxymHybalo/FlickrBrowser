@@ -20,5 +20,4 @@ export class PhotoComponent implements OnInit {
       .then(sizes => this.sizes = sizes['sizes']['size'][3])
   }
 
-
 }

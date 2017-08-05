@@ -1,0 +1,5 @@
+<span>{{ currentLocation }}</span>
+<span *ngIf="isWelcomeGreating">Welcome, {{ usrname }}</span>
+<span *ngIf="!isWelcomeGreating">
+  <a href="" (click)="goBack()">Back</a>
+</span>

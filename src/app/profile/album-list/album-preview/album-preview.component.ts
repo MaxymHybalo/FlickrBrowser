@@ -15,6 +15,7 @@ export class AlbumPreviewComponent implements OnInit {
   update: string;
 
   photo = null;
+
   photoResource = null;
 
   constructor(private service: AlbumService, private router: Router) { }

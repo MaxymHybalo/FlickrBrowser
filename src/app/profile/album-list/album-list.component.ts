@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AlbumService } from '../album.service';
 
 @Component({
@@ -9,6 +9,11 @@ import { AlbumService } from '../album.service';
 export class AlbumListComponent implements OnInit {
 
   constructor(private service: AlbumService) { }
+
+  @Input() username: string;
+
+  greating = 'Welcome, ' + this.username;
+  
 
   photosets = null;
 
