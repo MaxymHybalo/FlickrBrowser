@@ -16,7 +16,8 @@ import { AlbumService } from './profile/album.service';
 import { AlbumPreviewComponent } from './profile/album-list/album-preview/album-preview.component';
 import { AlbumComponent } from './profile/album/album.component';
 import { PhotoComponent } from './profile/album/photo/photo.component';
-import { NavBarComponent } from './profile/nav-bar/nav-bar.component'
+import { NavBarComponent } from './profile/nav-bar/nav-bar.component';
+import { PhotoDetailsComponent } from './profile/album/photo/photo-details/photo-details.component'
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NavBarComponent } from './profile/nav-bar/nav-bar.component'
     AlbumPreviewComponent,
     AlbumComponent,
     PhotoComponent,
-    NavBarComponent
+    NavBarComponent,
+    PhotoDetailsComponent
   ],
   imports: [
     BrowserModule,
