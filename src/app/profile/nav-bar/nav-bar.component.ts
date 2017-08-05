@@ -7,20 +7,17 @@ import { Location } from '@angular/common'
 })
 export class NavBarComponent implements OnInit {
 
+  constructor(private location: Location) { }
+
   currentLocation: string;
-
   username: string;
-
   isWelcomeGreeting = false;
 
-  constructor(private location: Location) { }
 
   ngOnInit() {
     if(this.location.path() === '/profile'){
       this.isWelcomeGreeting = true;
       this.username = JSON.parse(localStorage.getItem('accessToken'))['username'];
-      console.log(this.username);
-      
     }else {
       this.isWelcomeGreeting = false;
     }

@@ -48,11 +48,8 @@ export class PhotoDetailsComponent implements OnInit {
         break;
       }
     }
-    console.log(selectedImg);
-    
     return selectedImg;
   }
-
 
   private setUploadDate(info) {
     let existingValue = info['dateuploaded'];
