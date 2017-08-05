@@ -12,7 +12,7 @@ export class AlbumListComponent implements OnInit {
 
   @Input() username: string;
 
-  greating = 'Welcome, ' + this.username;
+  greeting = 'Welcome, ' + this.username;
   
 
   photosets = null;

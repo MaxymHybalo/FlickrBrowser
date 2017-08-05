@@ -9,15 +9,20 @@ export class NavBarComponent implements OnInit {
 
   currentLocation: string;
 
-  isWelcomeGreating = false;
+  username: string;
+
+  isWelcomeGreeting = false;
 
   constructor(private location: Location) { }
 
   ngOnInit() {
     if(this.location.path() === '/profile'){
-      this.isWelcomeGreating = true;
+      this.isWelcomeGreeting = true;
+      this.username = JSON.parse(localStorage.getItem('accessToken'))['username'];
+      console.log(this.username);
+      
     }else {
-      this.isWelcomeGreating = false;
+      this.isWelcomeGreeting = false;
     }
   }
 
