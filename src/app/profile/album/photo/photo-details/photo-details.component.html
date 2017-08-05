@@ -1,8 +1,8 @@
 <app-nav-bar></app-nav-bar>
-<div class="photo-container" *ngIf="photo">
-  <img src="{{ photo.sizes.size[5].source }}" alt="">   
+<div *ngIf="photo" class="photo-container" >
+  <img src="{{ photo.source }}" alt="">   
 </div>
-<div class="info-container" *ngIf="info">
+<div *ngIf="info" class="info-container" >
   <p>
     <strong>Name:</strong> {{ info.title._content }}
   </p>
@@ -13,4 +13,8 @@
     <strong>Owner:</strong> {{ info.owner.realname }}
   </p>
   <p><strong>Upload date: </strong>{{ info.dateuploaded }}</p>  
+</div>
+<div *ngIf="tags" class="tags-conatiner" >
+  <strong>Tags: </strong>
+  <span *ngFor="let tag of tags.tag" class="badge badge-primary">{{ tag.raw }}</span>
 </div>

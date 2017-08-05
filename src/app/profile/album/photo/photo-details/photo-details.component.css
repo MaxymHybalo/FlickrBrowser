@@ -2,3 +2,8 @@
     display: flex;
     justify-content: center;
 }
+
+.badge {
+    margin-left: 0.5em;
+    font-size: 1em;
+}

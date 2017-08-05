@@ -21,6 +21,7 @@ export class PhotoDetailsComponent implements OnInit {
 
   info: object;
   photo: object;
+  tags: object;
 
   ngOnInit() {
     this.route.paramMap
@@ -28,12 +29,30 @@ export class PhotoDetailsComponent implements OnInit {
         return this.service.getInfo(params.get('id'))
       })
       .subscribe(info => {
-        this.info = info['photo']
-        
+        this.info = info['photo'];
+        this.tags = this.info['tags'];
         this.service.getPhotoSizes(this.info['id'])
-          .then(sizes => this.photo = sizes)
+          .then(sizes => this.photo = this.selectSizeByScreen(sizes))
       })
   }
+
+  private selectSizeByScreen(sizes) {
+    sizes = sizes['sizes']['size'];
+    let selectedImg = null
+    for (let i = sizes.length-1; i > 0; i--) {
+      let apiWidth = parseInt(sizes[i]['width']);
+      let apiHeight = sizes[i]['height'];
+      let screen = window.screen;
+      if(apiWidth < screen.availWidth && apiHeight < screen.availHeight){
+        selectedImg = sizes[i];
+        break;
+      }
+    }
+    console.log(selectedImg);
+    
+    return selectedImg;
+  }
+
 
   private setUploadDate(info) {
     let existingValue = info['dateuploaded'];
