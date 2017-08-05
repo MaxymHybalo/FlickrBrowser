@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AlbumService } from '../../album.service'
+import { PhotoService } from './photo.service'
 import { Router } from '@angular/router'
 
 @Component({
@@ -13,7 +13,7 @@ export class PhotoComponent implements OnInit {
 
   sizes: object;
 
-  constructor(private service: AlbumService, private router: Router) { }
+  constructor(private service: PhotoService, private router: Router) { }
 
   ngOnInit() {
     this.service.getPhotoSizes(this.photo['id'])

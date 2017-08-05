@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AlbumService } from '../../album.service'
+import { PhotoService } from '../../album/photo/photo.service';
 import { Router } from '@angular/router'
 
 @Component({
@@ -18,7 +18,7 @@ export class AlbumPreviewComponent implements OnInit {
 
   photoResource = null;
 
-  constructor(private service: AlbumService, private router: Router) { }
+  constructor(private service: PhotoService, private router: Router) { }
 
   ngOnInit() {
     this.update = new Date(parseInt(this.album['date_update'] + '000')).toDateString();

@@ -9,10 +9,12 @@ import { ProfileComponent } from './profile/profile.component'
 
 import { AuthService } from './auth.service';
 import { ProfileService } from './profile/profile.service';
+import { AlbumService } from './profile/album/album.service';
+import { PhotoService } from './profile/album/photo/photo.service';
+
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { AlbumListComponent } from './profile/album-list/album-list.component'
-import { AlbumService } from './profile/album.service';
 import { AlbumPreviewComponent } from './profile/album-list/album-preview/album-preview.component';
 import { AlbumComponent } from './profile/album/album.component';
 import { PhotoComponent } from './profile/album/photo/photo.component';
@@ -65,7 +67,8 @@ const routes = [{
   providers: [
     AuthService,
     ProfileService,
-    AlbumService
+    AlbumService,
+    PhotoService
   ],
   bootstrap: [AppComponent]
 })

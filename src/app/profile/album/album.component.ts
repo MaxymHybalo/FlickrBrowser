@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
-import { AlbumService } from '../album.service'
+import { PhotoService } from './photo/photo.service'
 import 'rxjs/add/operator/switchMap';
 
 const PHOTO_PER_PAGE = 9
@@ -18,7 +18,7 @@ export class AlbumComponent implements OnInit {
   constructor(
     private location: Location, 
     private route: ActivatedRoute,
-    private service: AlbumService
+    private service: PhotoService
   ) { }
 
   album = [];
