@@ -1,3 +1,16 @@
-<p>
-  photo-details works!
-</p>
+<app-nav-bar></app-nav-bar>
+<div class="photo-container" *ngIf="photo">
+  <img src="{{ photo.sizes.size[5].source }}" alt="">   
+</div>
+<div class="info-container" *ngIf="info">
+  <p>
+    <strong>Name:</strong> {{ info.title._content }}
+  </p>
+  <p *ngIf="info.description._content">
+    <strong>Description:</strong> {{ info.description._content }} 
+  </p>
+  <p>
+    <strong>Owner:</strong> {{ info.owner.realname }}
+  </p>
+  <p><strong>Upload date: </strong>{{ info.dateuploaded }}</p>  
+</div>

@@ -40,6 +40,19 @@ export class PhotoService{
             .catch(error => error)
     }
 
+    getInfo(photoId) {
+        this.init();
+        let params = {
+            method: 'flickr.photos.getInfo',
+            photo_id: photoId
+        }
+        params = Object.assign(params, this.basicAPIParams);
+        return this.http.get(buildURL(params, api['REST'],  this.accessToken['oauth_token_secret']))
+            .toPromise()
+            .then(response => response.json() as object)
+            .catch(error => error)
+    }
+
     private init(): void { 
         this.accessToken = JSON.parse(localStorage.getItem('accessToken'));
         this.basicAPIParams = {

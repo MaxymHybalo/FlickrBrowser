@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
+
+import { PhotoService } from '../photo.service'
+
 import 'rxjs/add/operator/switchMap';
-
-
 
 @Component({
   selector: 'app-photo-details',
@@ -14,18 +15,29 @@ export class PhotoDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute, 
-    private location: Location
+    private location: Location,
+    private service: PhotoService
   ) { }
 
+  info: object;
+  photo: object;
+
   ngOnInit() {
-    // this.route.paramMap
-    //   .switchMap((params: ParamMap) => 
-    //     this.service.getPhotos(
-    //       params.get('id'), 
-    //       this.currentPage, 
-    //       PHOTO_PER_PAGE
-    //     ))
-    //   .subscribe(page => this.album = page['photoset']['photo'])
+    this.route.paramMap
+      .switchMap((params: ParamMap) => {
+        return this.service.getInfo(params.get('id'))
+      })
+      .subscribe(info => {
+        this.info = info['photo']
+        
+        this.service.getPhotoSizes(this.info['id'])
+          .then(sizes => this.photo = sizes)
+      })
   }
 
+  private setUploadDate(info) {
+    let existingValue = info['dateuploaded'];
+    info['dateuploaded'] = new Date(parseInt(existingValue + '000')).toDateString();
+    return info; 
+  }
 }
