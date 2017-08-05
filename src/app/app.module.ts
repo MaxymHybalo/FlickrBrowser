@@ -19,6 +19,30 @@ import { PhotoComponent } from './profile/album/photo/photo.component';
 import { NavBarComponent } from './profile/nav-bar/nav-bar.component';
 import { PhotoDetailsComponent } from './profile/album/photo/photo-details/photo-details.component'
 
+const routes = [{
+      path: 'profile',
+      component: ProfileComponent,
+      children: [
+        {
+          path: '',
+          component: AlbumListComponent
+        },
+        {
+          path: 'album/:id',
+          component: AlbumComponent
+        },
+        {
+          path: 'photo/:id',
+          component: PhotoDetailsComponent
+        }
+      ]
+    },
+    {
+      path: 'login',
+      component: LoginComponent
+    }
+  ]
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,25 +60,7 @@ import { PhotoDetailsComponent } from './profile/album/photo/photo-details/photo
     BrowserModule,
     HttpModule,
     NgbModule,
-    RouterModule.forRoot([{
-      path: 'profile',
-      component: ProfileComponent,
-      children: [
-        {
-          path: '',
-          component: AlbumListComponent
-        },
-        {
-          path: 'album/:id',
-          component: AlbumComponent
-        }
-      ]
-    },
-    {
-      path: 'login',
-      component: LoginComponent
-    }
-  ])
+    RouterModule.forRoot(routes)
   ],
   providers: [
     AuthService,
