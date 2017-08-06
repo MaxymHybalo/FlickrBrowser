@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import { PhotoService } from './photo/photo.service'
@@ -22,9 +22,13 @@ export class AlbumComponent implements OnInit {
   ) { }
 
   album = [];
+  albumId: number;
 
   currentPage = 1;
-
+  // contain number of avaliable pages
+  pages: number;
+  isLoadingPage = false;
+  preloadHeight: number;
 
   ngOnInit() {
     this.route.paramMap
@@ -34,18 +38,41 @@ export class AlbumComponent implements OnInit {
           this.currentPage, 
           PHOTO_PER_PAGE
         ))
-      .subscribe(page => this.album = page['photoset']['photo'])
+      .subscribe(page => {
+        this.albumId = page['photoset']['id'];
+        this.album = page['photoset']['photo'];
+        this.pages = page['photoset']['pages'];
+      })
   }
-  
+
+  @HostListener('window:scroll', ['$event']) handleScroll($event) {
+    let body = document.querySelector('body');
+    let scrollPos = body.scrollHeight - body.scrollTop;
+    let pageState = this.currentPage < this.pages;
+    if(scrollPos <= window.screen.availHeight && pageState && !this.isLoadingPage) {
+      this.loadNext(body);
+    }
+    if(body.scrollHeight > this.preloadHeight) {
+      this.isLoadingPage = false;
+    }
+  }
+
   goBack(): void {
     this.location.back();
   }
 
-  private markupToGrid(album) {
-    album = album['photoset']['photo'];
-    let mappedArray = [];
-    for(let i=0; i<=album.lenght; i++){
-
-    }
+  private loadNext(body): void {
+    // lookdown loading next page before loads previous 
+    this.isLoadingPage = true;
+    this.preloadHeight = body.scrollHeight;
+    this.currentPage++;
+    this.service.getPhotos(
+      this.albumId,
+      this.currentPage,
+      PHOTO_PER_PAGE
+    )
+      .then(page => this.album = this.album.concat(page['photoset']['photo']))
   }
+
+
 }
