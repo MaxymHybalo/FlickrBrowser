@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { buildApiUrl, buildURL, appKey } from '../../../../auth'
-import api from '../../../../api'
+import { buildURL, appKey } from '../../../queries'
+import api from '../../../api'
 
 import 'rxjs/add/operator/toPromise';
 

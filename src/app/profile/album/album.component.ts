@@ -64,8 +64,6 @@ export class AlbumComponent implements OnInit {
 
   private findStartItemsCount(){
     let height = window.screen.height;
-    console.log(height);
-    
     return Math.floor(height / 240) * 3;
   }
 

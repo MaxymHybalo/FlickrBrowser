@@ -4,6 +4,7 @@ import api from './api'
 
 var requestTokenUrl: string = api['REQUEST_TOKEN_URL'];
 
+// probably need to hide tokens
 export var appKey: string = '18a91e0d831c8ae7ce2f2478e8f7f2d0';
 
 var appSecret: string = '7f91aaf323eb9674&';
@@ -24,15 +25,6 @@ export function buildURL(params, baseUrl, secret='') {
     var assignedParams = params ? Object.assign(REQUEST_TOKEN_PARAMS, params) : REQUEST_TOKEN_PARAMS;
     let queryObject = prepareQuery(assignedParams, baseUrl, appSecret + secret);
     return queryObject['url'] + '&oauth_signature=' + queryObject['signature'];
-}
-
-export function buildApiUrl(params, baseUrl){
-    var accessTokenParams = JSON.parse(localStorage.getItem('accessToken'));
-    console.log('access token secret: ', accessTokenParams);
-    
-    let secret = appSecret + accessTokenParams['oauth_token_secret'];
-    let query = prepareQuery(params, baseUrl, secret);
-    return query['url'] + '&api_sig=' + query['signature']
 }
 
 function prepareQuery(params, baseUrl, secret, method='GET') {

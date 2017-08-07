@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 import { AuthService } from './auth.service'
 import { Location } from '@angular/common'
-import { parseURLQuery } from '../utils'
+import { parseURLQuery } from './utils'
 
 @Component({
   selector: 'app-root',
