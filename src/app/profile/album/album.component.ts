@@ -4,8 +4,6 @@ import { Location } from '@angular/common';
 import { PhotoService } from './photo/photo.service'
 import 'rxjs/add/operator/switchMap';
 
-const PHOTO_PER_PAGE = 9
-
 @Component({
   selector: 'app-album',
   templateUrl: './album.component.html',
@@ -21,6 +19,8 @@ export class AlbumComponent implements OnInit {
     private service: PhotoService
   ) { }
 
+  itemsAtSceen: number;
+
   album = [];
   albumId: number;
 
@@ -31,12 +31,13 @@ export class AlbumComponent implements OnInit {
   preloadHeight: number;
 
   ngOnInit() {
+
     this.route.paramMap
       .switchMap((params: ParamMap) => 
         this.service.getPhotos(
           params.get('id'), 
           this.currentPage, 
-          PHOTO_PER_PAGE
+          this.findStartItemsCount()
         ))
       .subscribe(page => {
         this.albumId = page['photoset']['id'];
@@ -49,7 +50,7 @@ export class AlbumComponent implements OnInit {
     let body = document.querySelector('body');
     let scrollPos = body.scrollHeight - body.scrollTop;
     let pageState = this.currentPage < this.pages;
-    if(scrollPos <= window.screen.availHeight && pageState && !this.isLoadingPage) {
+    if(scrollPos <= window.screen.availHeight * 1.4 && pageState && !this.isLoadingPage) {
       this.loadNext(body);
     }
     if(body.scrollHeight > this.preloadHeight) {
@@ -61,6 +62,14 @@ export class AlbumComponent implements OnInit {
     this.location.back();
   }
 
+  private findStartItemsCount(){
+    let height = window.screen.height;
+    console.log(height);
+    
+    return Math.floor(height / 240) * 3;
+  }
+
+
   private loadNext(body): void {
     // lookdown loading next page before loads previous 
     this.isLoadingPage = true;
@@ -69,7 +78,7 @@ export class AlbumComponent implements OnInit {
     this.service.getPhotos(
       this.albumId,
       this.currentPage,
-      PHOTO_PER_PAGE
+      this.findStartItemsCount()
     )
       .then(page => this.album = this.album.concat(page['photoset']['photo']))
   }

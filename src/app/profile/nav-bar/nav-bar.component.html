@@ -1,5 +1,6 @@
-<span>{{ currentLocation }}</span>
-<span *ngIf="isWelcomeGreeting">Welcome, {{ username }}</span>
-<span *ngIf="!isWelcomeGreeting">
-  <a href="" (click)="goBack()">Back</a>
-</span>
+<div class="col-12 nav-container">
+    <span *ngIf="isWelcomeGreeting">Welcome, {{ username }}</span> 
+    <span *ngIf="!isWelcomeGreeting">
+        <a href="" (click)="goBack()">Back</a> 
+    </span>
+</div>
