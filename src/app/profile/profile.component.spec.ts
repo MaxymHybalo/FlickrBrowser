@@ -4,13 +4,13 @@ import { ProfileComponent } from './profile.component';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
-  let fixture: ComponentFixture<ProfileComponent>;
+  let fixture: ComponentFixture < ProfileComponent > ;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfileComponent ]
-    })
-    .compileComponents();
+        declarations: [ProfileComponent]
+      })
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -23,3 +23,4 @@ describe('ProfileComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

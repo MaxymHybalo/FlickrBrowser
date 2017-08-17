@@ -1,5 +1,8 @@
 import b64_hmac_sha1 from 'hmacsha1';
-import { makeURLSearchQuery, sortObject } from './utils'
+import {
+  makeURLSearchQuery,
+  sortObject
+} from './utils'
 import api from './api'
 
 var requestTokenUrl: string = api['REQUEST_TOKEN_URL'];
@@ -14,40 +17,41 @@ var nonce: number = Math.floor(Math.random() * (9999999999 - 1000000000) + 10000
 var timestamp: number = new Date().valueOf();
 
 const REQUEST_TOKEN_PARAMS = {
-    'oauth_consumer_key': appKey,
-    'oauth_nonce': nonce,
-    'oauth_signature_method': 'HMAC-SHA1',
-    'oauth_timestamp': timestamp,
-    'oauth_version': '1.0'
+  'oauth_consumer_key': appKey,
+  'oauth_nonce': nonce,
+  'oauth_signature_method': 'HMAC-SHA1',
+  'oauth_timestamp': timestamp,
+  'oauth_version': '1.0'
 }
 
-export function buildURL(params, baseUrl, secret='') {
-    var assignedParams = params ? Object.assign(REQUEST_TOKEN_PARAMS, params) : REQUEST_TOKEN_PARAMS;
-    let queryObject = prepareQuery(assignedParams, baseUrl, appSecret + secret);
-    return queryObject['url'] + '&oauth_signature=' + queryObject['signature'];
+export function buildURL(params, baseUrl, secret = '') {
+  var assignedParams = params ? Object.assign(REQUEST_TOKEN_PARAMS, params) : REQUEST_TOKEN_PARAMS;
+  let queryObject = prepareQuery(assignedParams, baseUrl, appSecret + secret);
+  return queryObject['url'] + '&oauth_signature=' + queryObject['signature'];
 }
 
-function prepareQuery(params, baseUrl, secret, method='GET') {
-    params = sortObject(params);
-    let baseString = getBaseQuery(method, baseUrl, params);
-    return {
-        url: baseUrl + '?' + buildURIQuery(params),
-        signature: generateSingature(baseString, secret)
-    }
+function prepareQuery(params, baseUrl, secret, method = 'GET') {
+  params = sortObject(params);
+  let baseString = getBaseQuery(method, baseUrl, params);
+  return {
+    url: baseUrl + '?' + buildURIQuery(params),
+    signature: generateSingature(baseString, secret)
+  }
 }
 
-function getBaseQuery(method='GET', url=requestTokenUrl, params=REQUEST_TOKEN_PARAMS) {
-    return  method + '&' 
-            + encodeURIComponent(url) +'&'
-            + encodeURIComponent(buildURIQuery(params));
+function getBaseQuery(method = 'GET', url = requestTokenUrl, params = REQUEST_TOKEN_PARAMS) {
+  return method + '&' +
+    encodeURIComponent(url) + '&' +
+    encodeURIComponent(buildURIQuery(params));
 }
 
 function generateSingature(baseString: string, secret: string = appSecret) {
-    return encodeURIComponent(b64_hmac_sha1(secret, baseString));
+  return encodeURIComponent(b64_hmac_sha1(secret, baseString));
 }
 
 
 function buildURIQuery(params) {
-    let query = makeURLSearchQuery(params).toString();    
-    return query
+  let query = makeURLSearchQuery(params).toString();
+  return query
 }
+
